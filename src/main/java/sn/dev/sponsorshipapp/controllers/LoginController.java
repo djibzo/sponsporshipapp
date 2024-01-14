@@ -29,8 +29,8 @@ public class LoginController {
                     Notification.NotifSuccess("Succès !","Connexion reussie !");
                     if (user.getProfil().getName().equalsIgnoreCase("RO_ADMIN"))
                         Outils.load(event,"Bienvenue","/pages/admin.fxml");//admin
-                    else if (user.getProfil().getName().equalsIgnoreCase("RO_CANDIDAT"))
-                        Outils.load(event,"Bienvenue", "/pages/admin.fxml");//candidat
+                    else if (user.getProfil().getName().equalsIgnoreCase("RO_ELECTEUR"))
+                        Outils.load(event,"Bienvenue", "/pages/eleParCan.fxml");//candidat
                     else
                         Outils.load(event,"Bienvenue", "/pages/admin.fxml");//electeur
 
