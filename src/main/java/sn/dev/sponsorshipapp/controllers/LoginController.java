@@ -30,7 +30,7 @@ public class LoginController {
                     if (user.getProfil().getName().equalsIgnoreCase("RO_ADMIN"))
                         Outils.load(event,"Bienvenue","/pages/admin.fxml");//admin
                     else if (user.getProfil().getName().equalsIgnoreCase("RO_ELECTEUR"))
-                        Outils.load(event,"Bienvenue", "/pages/eleParCan.fxml");//candidat
+                        Outils.load(event,"Parrainage d'un candidat", "/pages/eleParCan.fxml");//candidat
                     else
                         Outils.load(event,"Bienvenue", "/pages/admin.fxml");//electeur
 

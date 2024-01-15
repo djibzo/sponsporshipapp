@@ -42,7 +42,7 @@ public class EleParCan implements Initializable {
     private DBConnexion db=new DBConnexion();
     public ObservableList<Utilisateur> getUsers(){
         ObservableList<Utilisateur> users= FXCollections.observableArrayList();
-        String sql="SELECT * FROM user ORDER BY nom ASC";
+        String sql="SELECT * FROM user WHERE profil=2 ORDER BY nom ASC";
         try {
             db.initPrepar(sql);
             ResultSet rs=db.executeSelect();
