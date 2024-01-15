@@ -11,4 +11,5 @@ module sn.dev.sponsorshipapp {
     exports sn.dev.sponsorshipapp.controllers;
 
     opens sn.dev.sponsorshipapp.controllers to javafx.fxml,javafx.graphics;
+    opens sn.dev.sponsorshipapp.entities to javafx.base;
 }
