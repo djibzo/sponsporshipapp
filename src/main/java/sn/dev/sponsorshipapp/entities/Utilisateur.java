@@ -1,6 +1,7 @@
 package sn.dev.sponsorshipapp.entities;
 
 import lombok.*;
+import sn.dev.sponsorshipapp.entities.Role;
 
 @NoArgsConstructor @AllArgsConstructor @Data
 public class Utilisateur {

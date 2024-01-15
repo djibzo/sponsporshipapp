@@ -10,7 +10,7 @@ public class DBConnexion {
     private int ok;
 
     public void getConnection(){
-        String url = "jdbc:mysql://localhost:3306/sponsorship_db";
+        String url = "jdbc:mysql://localhost:3306/sponsorship-db";
         String user = "root";
         String password = "";
         try {
