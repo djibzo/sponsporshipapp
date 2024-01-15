@@ -9,6 +9,6 @@ module sn.dev.sponsorshipapp {
     opens sn.dev.sponsorshipapp to javafx.fxml;
     exports sn.dev.sponsorshipapp;
     exports sn.dev.sponsorshipapp.controllers;
-    opens sn.dev.sponsorshipapp.controllers to javafx.fxml;
-    opens sn.dev.sponsorshipapp.entities to javafx.base;
+
+    opens sn.dev.sponsorshipapp.controllers to javafx.fxml,javafx.graphics;
 }
