@@ -3,16 +3,16 @@ package sn.dev.sponsorshipapp.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import sn.dev.sponsorshipapp.DBConnexion;
 import sn.dev.sponsorshipapp.entities.Role;
 import sn.dev.sponsorshipapp.entities.Utilisateur;
+import sn.dev.sponsorshipapp.tools.Notification;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -27,8 +27,7 @@ public class UserController  implements Initializable {
     @FXML
     private TextField PrenomTfd;
 
-    @FXML
-    private TextField ProfilTfd;
+    private  int id;
 
     @FXML
     private Button desactiverBtn;
@@ -38,6 +37,8 @@ public class UserController  implements Initializable {
 
     @FXML
     private TableColumn<Utilisateur, String> nomCol;
+    @FXML
+    private TableColumn<Utilisateur, Integer> idCol;
 
     @FXML
     private TableColumn<Utilisateur, String> prenomCol;
@@ -48,13 +49,40 @@ public class UserController  implements Initializable {
     @FXML
     private TableView<Utilisateur> usersTb;
 
+    @FXML
+    private ComboBox<Role> profilCb;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadTable();
+        loadComboBox();
+    }
+    public void loadComboBox() {
+        ObservableList<Role> roles = getRolesFromDatabase();
+        profilCb.setItems(roles);
+    }
+
+    public ObservableList<Role> getRolesFromDatabase() {
+        ObservableList<Role> roles = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM role";
+        try {
+            db.initPrepar(sql);
+            ResultSet rs = db.executeSelect();
+            while (rs.next()) {
+                Role role = new Role();
+                role.setId(rs.getInt("id"));
+                role.setName(rs.getString("name"));
+                roles.add(role);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
+        return roles;
     }
     public ObservableList<Utilisateur> getUtilisateurs(){
         ObservableList<Utilisateur> utilisateurs= FXCollections.observableArrayList();
-        String sql= "SELECT * FROM user ";
+        String sql= "SELECT * FROM user JOIN role ON user.profil = role.id WHERE profil != 3";
         try {
             db.initPrepar(sql);
             ResultSet rs= db.executeSelect();
@@ -62,7 +90,10 @@ public class UserController  implements Initializable {
                 Utilisateur u=new Utilisateur();
                 u.setNom(rs.getString("nom"));
                 u.setPrenom(rs.getString("prenom"));
-               // u.setProfil(rs.getInt("Profil"));
+                Role role = new Role();
+                role.setName(rs.getString("name"));
+                u.setProfil(role);
+                u.setId(rs.getInt("id"));
                 utilisateurs.add(u);
             }
         }catch (SQLException e){
@@ -75,6 +106,75 @@ public class UserController  implements Initializable {
         usersTb.setItems(liste);
         nomCol.setCellValueFactory(new PropertyValueFactory<Utilisateur, String>("nom"));
         prenomCol.setCellValueFactory(new PropertyValueFactory<Utilisateur, String>("prenom"));
-        //nomCol.setCellValueFactory(new PropertyValueFactory<Utilisateur, String>("nom"));
+        profilCol.setCellValueFactory(new PropertyValueFactory<Utilisateur, Role>("profil"));
+        idCol.setCellValueFactory(new PropertyValueFactory<Utilisateur, Integer>("id"));
+    }
+
+    private int getRoleIdByName(String roleName) {
+        String sql = "SELECT id FROM role WHERE name = ?";
+        try {
+            db.initPrepar(sql);
+            db.getPstm().setString(1, roleName);
+            ResultSet rs = db.executeSelect();
+            if (rs != null && rs.next()) {
+                return rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Erreur lors de la récupération de l'ID du rôle depuis la base de données", e);
+        }
+        return -1;
+    }
+
+
+    @FXML
+    void save(ActionEvent event) {
+        String sql=" INSERT INTO user(nom, prenom, login, password, activated, profil) VALUES( ? , ? , ? , ? , ? , ? ) ";
+        String selectedRoleName = profilCb.getValue().getName();
+        int roleId = getRoleIdByName(selectedRoleName);
+
+        try {
+
+            db.initPrepar(sql);
+            db.getPstm().setString(1,NomTfd.getText());
+            db.getPstm().setString(2,PrenomTfd.getText());
+            db.getPstm().setString(3,NomTfd.getText().toLowerCase()+PrenomTfd.getText()+"2024");
+            db.getPstm().setString(4,"passer123");
+            db.getPstm().setInt(5,1);
+            db.getPstm().setInt(6,roleId);
+            db.executeMaj();
+            db.closeConnection();
+            loadTable();
+            clear();
+        }catch (SQLException e){
+            throw new RuntimeException("ERREUR");
+        }
+    }
+    public void clear(){
+        NomTfd.setText("");
+        PrenomTfd.setText("");
+        loadComboBox();
+
+    }
+    @FXML
+    void desactiver(ActionEvent event) {
+        String sql=" UPDATE user SET activated= ? WHERE id = ? ";
+        try {
+
+            db.initPrepar(sql);
+            db.getPstm().setInt(1,0);
+            db.getPstm().setInt(2,id);
+            db.executeMaj();
+            db.closeConnection();
+            Notification.NotifSuccess("Utilisateur Désactivé"," Vous avez desactivé l'utilisateur selectionné");
+        }catch (SQLException e){
+            throw new RuntimeException("ERREUR");
+        }
+    }
+    @FXML
+     void getData(MouseEvent event) {
+        Utilisateur u =usersTb.getSelectionModel().getSelectedItem();
+        id=u.getId();
+
     }
 }

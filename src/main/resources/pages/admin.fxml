@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -10,7 +11,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 
 <AnchorPane prefHeight="537.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sn.dev.sponsorshipapp.controllers.UserController">
     <children>
@@ -41,11 +41,11 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                     </VBox.margin>
                 </Text>
-                <TextField fx:id="ProfilTfd">
+                <ComboBox fx:id="profilCb" prefHeight="25.0" prefWidth="195.0">
                     <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                     </VBox.margin>
-                </TextField>
+                </ComboBox>
             </children>
         </VBox>
         <Text layoutX="163.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion Des Utilisateurs" wrappingWidth="286.8033752441406">
@@ -53,17 +53,18 @@
                 <Font size="24.0" />
             </font>
         </Text>
-        <TableView fx:id="usersTb" layoutX="240.0" layoutY="108.0" prefHeight="230.0" prefWidth="386.0">
+        <TableView fx:id="usersTb" layoutX="235.0" layoutY="108.0" onMouseClicked="#getData" prefHeight="230.0" prefWidth="391.0">
             <columns>
-                <TableColumn fx:id="nomCol" prefWidth="117.3333740234375" text="Nom" />
-                <TableColumn fx:id="prenomCol" prefWidth="124.0" text="Prenom" />
-                <TableColumn fx:id="profilCol" prefWidth="142.66668701171875" text="Profil" />
+                <TableColumn fx:id="nomCol" prefWidth="100.0" text="Nom" />
+                <TableColumn fx:id="prenomCol" prefWidth="100.0" text="Prenom" />
+                <TableColumn fx:id="profilCol" prefWidth="100.0" text="Profil" />
+            <TableColumn fx:id="idCol" prefWidth="100.0" text="ID" />
             </columns>
         </TableView>
         <ButtonBar layoutX="196.0" layoutY="396.0" prefHeight="40.0" prefWidth="160.0">
             <buttons>
-                <Button fx:id="enregistrerBtn" mnemonicParsing="false" text="Enregistrer" />
-                <Button fx:id="desactiverBtn" mnemonicParsing="false" text="Desactiver" />
+                <Button fx:id="enregistrerBtn" mnemonicParsing="false" onAction="#save" text="Enregistrer" />
+                <Button fx:id="desactiverBtn" mnemonicParsing="false" onAction="#desactiver" text="Desactiver" />
             </buttons>
         </ButtonBar>
     </children>
