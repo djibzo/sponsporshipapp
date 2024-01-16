@@ -35,7 +35,7 @@ public class LoginController {
                     else if (user.getProfil().getName().equalsIgnoreCase("RO_ELECTEUR") && user.getActived()==1)
                         Outils.load(event,"Parrainage d'un candidat", "/pages/eleParCan.fxml");//ELECTEUR
                     else if (user.getProfil().getName().equalsIgnoreCase("RO_CANDIDAT") && user.getActived()==1)
-                        Outils.load(event,"Bienvenue", "/pages/eleParCan.fxml");//page candidat a ajouter
+                        Outils.load(event,"Bienvenue", "/pages/candidatPage.fxml");//page candidat a ajouter
                     else if (user.getActived()==0)
                         Outils.load(event,"Page descativée", "/pages/diabledPage.fxml");//page pour compte desactive
 

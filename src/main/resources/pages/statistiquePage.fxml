@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sn.dev.sponsorshipapp.controllers.StatistiquePage">
+   <children>
+      <Text layoutX="137.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Statistiques parrainages">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Text>
+      <TableView fx:id="statParrainages" layoutX="92.0" layoutY="79.0" prefHeight="200.0" prefWidth="419.0">
+        <columns>
+          <TableColumn fx:id="candidat" prefWidth="75.0" text="Candidats" />
+          <TableColumn fx:id="nbpars" prefWidth="75.0" text="Nombre de parrainages" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </children>
+</AnchorPane>
