@@ -13,7 +13,9 @@ import sn.dev.sponsorshipapp.DBConnexion;
 import sn.dev.sponsorshipapp.entities.Role;
 import sn.dev.sponsorshipapp.entities.Utilisateur;
 import sn.dev.sponsorshipapp.tools.Notification;
+import sn.dev.sponsorshipapp.tools.Outils;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,7 +24,7 @@ import java.util.ResourceBundle;
 public class UserController  implements Initializable {
     private DBConnexion db= new DBConnexion();
     @FXML
-    private TextField NomTfd;
+    private TextField NomTfd;;
 
     @FXML
     private TextField PrenomTfd;
@@ -34,6 +36,9 @@ public class UserController  implements Initializable {
 
     @FXML
     private Button enregistrerBtn;
+
+    @FXML
+    private Button activerBtn;
 
     @FXML
     private TableColumn<Utilisateur, String> nomCol;
@@ -52,6 +57,9 @@ public class UserController  implements Initializable {
     @FXML
     private ComboBox<Role> profilCb;
 
+    @FXML
+    private MenuItem ActiveBT;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -59,13 +67,17 @@ public class UserController  implements Initializable {
         loadComboBox();
     }
     public void loadComboBox() {
-        ObservableList<Role> roles = getRolesFromDatabase();
-        profilCb.setItems(roles);
+        if (profilCb != null) {
+            ObservableList<Role> roles = getRolesFromDatabase();
+            profilCb.setItems(roles);
+        } else {
+            System.err.println("Le ComboBox (profilCb) est nul.");
+        }
     }
 
     public ObservableList<Role> getRolesFromDatabase() {
         ObservableList<Role> roles = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM role";
+        String sql = "SELECT * FROM role WHERE id!=1";
         try {
             db.initPrepar(sql);
             ResultSet rs = db.executeSelect();
@@ -82,7 +94,7 @@ public class UserController  implements Initializable {
     }
     public ObservableList<Utilisateur> getUtilisateurs(){
         ObservableList<Utilisateur> utilisateurs= FXCollections.observableArrayList();
-        String sql= "SELECT * FROM user JOIN role ON user.profil = role.id WHERE profil != 3";
+        String sql= "SELECT * FROM user JOIN role ON user.profil = role.id WHERE profil != 1 AND activated=1";
         try {
             db.initPrepar(sql);
             ResultSet rs= db.executeSelect();
@@ -167,6 +179,7 @@ public class UserController  implements Initializable {
             db.executeMaj();
             db.closeConnection();
             Notification.NotifSuccess("Utilisateur Désactivé"," Vous avez desactivé l'utilisateur selectionné");
+            loadTable();
         }catch (SQLException e){
             throw new RuntimeException("ERREUR");
         }
@@ -177,4 +190,14 @@ public class UserController  implements Initializable {
         id=u.getId();
 
     }
+
+    @FXML
+    void Active(ActionEvent event) throws IOException {
+
+            Outils.load(event,"Activer un utilisateur ", "/pages/ActiverUser.fxml");
+
+    }
+
+
+
 }
