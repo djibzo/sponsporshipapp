@@ -13,7 +13,7 @@
         <columns>
           <TableColumn fx:id="prenom" prefWidth="75.0" text="Prenom" />
           <TableColumn fx:id="nom" prefWidth="75.0" text="Nom" />
-            <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="id" prefWidth="75.0" text="ID" visible="false" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

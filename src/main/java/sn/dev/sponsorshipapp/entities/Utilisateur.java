@@ -10,4 +10,8 @@ public class Utilisateur {
     private int actived;
     private Role profil;
 
+    public Utilisateur(int id, String nom) {//pour recvoir les candidat et le nombre de parrains
+        this.id = id;
+        this.nom = nom;
+    }
 }
