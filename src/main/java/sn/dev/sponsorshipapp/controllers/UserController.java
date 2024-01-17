@@ -215,6 +215,13 @@ public class UserController  implements Initializable {
 
     }
 
+    @FXML
+    void Stats(ActionEvent event) throws IOException {
+
+        Outils.load(event,"Statistiques Candidats ", "/pages/statistiquePage.fxml");
+
+    }
+
 
 
 }

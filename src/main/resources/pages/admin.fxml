@@ -68,5 +68,6 @@
             </buttons>
         </ButtonBar>
       <Button fx:id="activerBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#Active" prefHeight="35.0" prefWidth="149.0" text="Activer un utilisateur" />
+      <Button fx:id="StatsBtn" layoutX="177.0" layoutY="14.0" mnemonicParsing="false" onAction="#Stats" prefHeight="35.0" prefWidth="149.0" text="Voir Les Stats" />
     </children>
 </AnchorPane>
