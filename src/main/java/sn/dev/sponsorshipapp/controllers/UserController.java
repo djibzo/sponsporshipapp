@@ -222,6 +222,10 @@ public class UserController  implements Initializable {
 
     }
 
+    @FXML
+    void DECONNECTER(ActionEvent event) throws IOException {
+        Outils.load(event,"Connexion ", "/pages/login.fxml");
 
+    }
 
 }

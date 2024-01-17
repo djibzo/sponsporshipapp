@@ -2,6 +2,7 @@ package sn.dev.sponsorshipapp.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -12,7 +13,9 @@ import sn.dev.sponsorshipapp.DBConnexion;
 import sn.dev.sponsorshipapp.entities.Role;
 import sn.dev.sponsorshipapp.entities.UserModel;
 import sn.dev.sponsorshipapp.entities.Utilisateur;
+import sn.dev.sponsorshipapp.tools.Outils;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -92,5 +95,9 @@ public class CandidatPage implements Initializable {
         nom.setCellValueFactory(new PropertyValueFactory<Utilisateur, String>("nom"));
         prenom.setCellValueFactory(new PropertyValueFactory<Utilisateur, String>("prenom"));
         nbpars.setText(String.valueOf(getNbParrains()));
+    }
+    @FXML
+    void DECONNECTER(ActionEvent event) throws IOException {
+        Outils.load(event,"Connexion ", "/pages/login.fxml");
     }
 }

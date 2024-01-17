@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -34,5 +35,6 @@
             <Font size="11.0" />
          </font>
       </TextField>
+      <Button layoutX="505.0" layoutY="17.0" mnemonicParsing="false" onAction="#DECONNECTER" style="-fx-background-color: red;" text="Deconnexion" textAlignment="RIGHT" />
    </children>
 </AnchorPane>

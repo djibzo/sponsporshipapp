@@ -13,8 +13,10 @@ import sn.dev.sponsorshipapp.DBConnexion;
 import sn.dev.sponsorshipapp.entities.UserModel;
 import sn.dev.sponsorshipapp.entities.Utilisateur;
 import sn.dev.sponsorshipapp.tools.Notification;
+import sn.dev.sponsorshipapp.tools.Outils;
 
 import javax.xml.transform.Source;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -143,6 +145,12 @@ public class EleParCan implements Initializable {
         }
         return can;
     }
+
+    @FXML
+    void DECONNECTER(ActionEvent event) throws IOException {
+        Outils.load(event,"Connexion ", "/pages/login.fxml");
+    }
+
     ///
 //    public List<Integer> getNb() {//selectionne la liste des electeur
 //        List<Integer> pars = new ArrayList<>();
