@@ -66,9 +66,27 @@ public class UserController  implements Initializable {
         loadTable();
         loadComboBox();
     }
+    private int getNombreDeCandidats() {
+        String countSql = "SELECT COUNT(*) FROM user WHERE profil = 2 AND activated = 1"; // Assurez-vous que le profil pour ROLE_CANDIDAT est 2
+        try {
+            db.initPrepar(countSql);
+            ResultSet resultSet = db.executeSelect();
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("ERREUR lors de la récupération du nombre de candidats", e);
+        }
+
+        return 0; // En cas d'erreur, retourner 0
+    }
     public void loadComboBox() {
         if (profilCb != null) {
             ObservableList<Role> roles = getRolesFromDatabase();
+            if (getNombreDeCandidats() >= 5) {
+                roles.removeIf(role -> "RO_CANDIDAT".equals(role.getName()));
+            }
+
             profilCb.setItems(roles);
         } else {
             System.err.println("Le ComboBox (profilCb) est nul.");
@@ -144,7 +162,6 @@ public class UserController  implements Initializable {
         String sql=" INSERT INTO user(nom, prenom, login, password, activated, profil) VALUES( ? , ? , ? , ? , ? , ? ) ";
         String selectedRoleName = profilCb.getValue().getName();
         int roleId = getRoleIdByName(selectedRoleName);
-
         try {
 
             db.initPrepar(sql);
@@ -168,6 +185,7 @@ public class UserController  implements Initializable {
         loadComboBox();
 
     }
+
     @FXML
     void desactiver(ActionEvent event) {
         String sql=" UPDATE user SET activated= ? WHERE id = ? ";
@@ -179,7 +197,6 @@ public class UserController  implements Initializable {
             db.executeMaj();
             db.closeConnection();
             Notification.NotifSuccess("Utilisateur Désactivé"," Vous avez desactivé l'utilisateur selectionné");
-            loadTable();
         }catch (SQLException e){
             throw new RuntimeException("ERREUR");
         }

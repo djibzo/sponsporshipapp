@@ -48,25 +48,25 @@
                 </ComboBox>
             </children>
         </VBox>
-        <Text layoutX="155.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion Des Utilisateurs" wrappingWidth="286.8033752441406">
+        <Text layoutX="177.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion Des Utilisateurs" wrappingWidth="286.8033752441406">
             <font>
                 <Font size="24.0" />
             </font>
         </Text>
         <TableView fx:id="usersTb" layoutX="235.0" layoutY="108.0" onMouseClicked="#getData" prefHeight="230.0" prefWidth="391.0">
             <columns>
-                <TableColumn fx:id="nomCol" prefWidth="100.0" text="Nom" />
-                <TableColumn fx:id="prenomCol" prefWidth="100.0" text="Prenom" />
-                <TableColumn fx:id="profilCol" prefWidth="100.0" text="Profil" />
-            <TableColumn fx:id="idCol" prefWidth="100.0" text="ID" />
+                <TableColumn fx:id="nomCol" prefWidth="130.0" text="Nom" />
+                <TableColumn fx:id="prenomCol" prefWidth="130.0" text="Prenom" />
+                <TableColumn fx:id="profilCol" prefWidth="130.0" text="Profil" />
+            <TableColumn fx:id="idCol" prefWidth="100.0" text="ID" visible="false" />
             </columns>
         </TableView>
-        <ButtonBar layoutX="81.0" layoutY="396.0" prefHeight="40.0" prefWidth="403.0">
+        <ButtonBar layoutX="-48.0" layoutY="396.0" prefHeight="40.0" prefWidth="403.0">
             <buttons>
-                <Button fx:id="enregistrerBtn" mnemonicParsing="false" onAction="#save" prefHeight="31.0" prefWidth="81.0" text="Enregistrer" />
-                <Button fx:id="desactiverBtn" mnemonicParsing="false" onAction="#desactiver" text="Desactiver" />
-            <Button fx:id="activeBtn" mnemonicParsing="false" onAction="#Active" text="Activer" />
+                <Button fx:id="enregistrerBtn" mnemonicParsing="false" onAction="#save" prefHeight="35.0" prefWidth="80.0" text="Enregistrer" />
+                <Button fx:id="desactiverBtn" mnemonicParsing="false" onAction="#desactiver" prefHeight="35.0" prefWidth="80.0" text="Desactiver" />
             </buttons>
         </ButtonBar>
+      <Button fx:id="activerBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#Active" prefHeight="35.0" prefWidth="149.0" text="Activer un utilisateur" />
     </children>
 </AnchorPane>

@@ -7,15 +7,15 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sn.dev.sponsorshipapp.controllers.AdminActController">
    <children>
-      <TableView fx:id="usersTb" layoutX="84.0" layoutY="73.0" onMouseClicked="#getData" prefHeight="230.0" prefWidth="391.0">
+      <TableView fx:id="usersTb" layoutX="92.0" layoutY="75.0" onMouseClicked="#getData" prefHeight="230.0" prefWidth="400.0">
          <columns>
-            <TableColumn fx:id="nomCol" prefWidth="100.0" text="Nom" />
-            <TableColumn fx:id="prenomCol" prefWidth="100.0" text="Prenom" />
-            <TableColumn fx:id="profilCol" prefWidth="100.0" text="Profil" />
-            <TableColumn fx:id="idCol" prefWidth="100.0" text="ID" />
+            <TableColumn fx:id="nomCol" prefWidth="133.0" text="Nom" />
+            <TableColumn fx:id="prenomCol" prefWidth="133.0" text="Prenom" />
+            <TableColumn fx:id="profilCol" prefWidth="133.0" text="Profil" />
+            <TableColumn fx:id="idCol" prefWidth="100.0" text="ID" visible="false" />
          </columns>
       </TableView>
-      <Button layoutX="247.0" layoutY="329.0" mnemonicParsing="false" onAction="#activer" text="Activer" />
-      <Button layoutX="175.0" layoutY="329.0" mnemonicParsing="false" onAction="#retour" text="Retour" />
+      <Button layoutX="257.0" layoutY="329.0" mnemonicParsing="false" onAction="#activer" prefHeight="25.0" prefWidth="70.0" text="Activer" />
+      <Button layoutX="175.0" layoutY="329.0" mnemonicParsing="false" onAction="#retour" prefHeight="25.0" prefWidth="70.0" text="Retour" />
    </children>
 </AnchorPane>
